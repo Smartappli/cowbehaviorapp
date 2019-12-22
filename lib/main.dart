@@ -77,6 +77,32 @@ class _MyHomePageState extends State<MyHomePage> {
   static MethodChannel _methodChannel;
   static EventChannel _eventChannel;
 
+  bool switchValue1 = false;
+  bool switchValue2 = false;
+  bool switchValue3 = false;
+  bool switchValue4 = false;
+  bool switchValue5 = false;
+  bool switchValue6 = false;
+  bool switchValue8 = false;
+  bool switchValue9 = false;
+  bool switchValue10 = false;
+  bool switchValue11 = false;
+  bool switchValue12 = false;
+  bool switchValue13 = false;
+  bool switchValue14 = false;
+  bool switchValue15 = false;
+  bool switchValue16 = false;
+  bool switchValue17 = false;
+  bool switchValue19 = false;
+  bool switchValue20 = false;
+  bool switchValue21 = false;
+  bool switchValue28 = false;
+  bool switchValue29 = false;
+  bool switchValue30 = false;
+  bool switchValue31 = false;
+  bool switchValue34 = false;
+  bool switchValue35 = false;
+
   List<Accelerometer> _listAccelerometer = [];                            // Type 1
   List<MagneticField> _listMagnetometer = [];                             // Type 2
   List<OrientationSensor> _listOrientationSensor = [];                    // Type 3
@@ -821,6 +847,88 @@ class _MyHomePageState extends State<MyHomePage> {
     return (data.name == receivedData['name'] && data.vendorName == receivedData['vendorName'] && data.version == receivedData['version']);
   }
 
+  void _onChanged(bool value, int sens) {
+    setState(() {
+      switch(sens) {
+        case 1:
+          switchValue1 = value;
+          break;
+        case 2:
+          switchValue2 = value;
+          break;
+        case 3:
+          switchValue3 = value;
+          break;
+        case 4:
+          switchValue4 = value;
+          break;
+        case 5:
+          switchValue5 = value;
+          break;
+        case 6:
+          switchValue6 = value;
+          break;
+        case 8:
+          switchValue8 = value;
+          break;
+        case 9:
+          switchValue9 = value;
+          break;
+        case 10:
+          switchValue10 = value;
+          break;
+        case 11:
+          switchValue11 = value;
+          break;
+        case 12:
+          switchValue12 = value;
+          break;
+        case 13:
+          switchValue13 = value;
+          break;
+        case 14:
+          switchValue14 = value;
+          break;
+        case 15:
+          switchValue15 = value;
+          break;
+        case 16:
+          switchValue16 = value;
+          break;
+        case 17:
+          switchValue17 = value;
+          break;
+        case 19:
+          switchValue19 = value;
+          break;
+        case 20:
+          switchValue20 = value;
+          break;
+        case 21:
+          switchValue21 = value;
+          break;
+        case 28:
+          switchValue28 = value;
+          break;
+        case 29:
+          switchValue29 = value;
+          break;
+        case 30:
+          switchValue30 = value;
+          break;
+        case 31:
+          switchValue31 = value;
+          break;
+        case 34:
+          switchValue34 = value;
+          break;
+        case 35:
+          switchValue35 = value;
+          break;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold (
@@ -830,6 +938,31 @@ class _MyHomePageState extends State<MyHomePage> {
           style: TextStyle(color: Colors.black),
         ), backgroundColor: Colors.lightBlue,
       ),
-    body: ListView(padding:EdgeInsets.all(6.0)));
+    body: new Container(
+      padding:EdgeInsets.all(32.0),
+      child: new Column(
+        children: <Widget>[
+          new SwitchListTile(
+            title: new Text('Accelerometer'),
+            activeColor: Colors.red,
+            value: switchValue1,
+            onChanged: (bool value) {_onChanged(value,1);}
+          ),
+          new SwitchListTile(
+              title: new Text('Gyroscope'),
+              activeColor: Colors.red,
+              value: switchValue2,
+              onChanged: (bool value) {_onChanged(value,2);}
+          ),
+          new SwitchListTile(
+              title: new Text('Magnetometer'),
+              activeColor: Colors.red,
+              value: switchValue3,
+              onChanged: (bool value) {_onChanged(value,3);}
+          ),
+        ],
+      ),
+      ),
+    );
   }
 }
