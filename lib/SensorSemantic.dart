@@ -369,7 +369,7 @@ class HeartRate {
 }
 
 // Type 28 - Pose 6DOF
-class pose6DOF {
+class Pose6DOF {
   // Variables Declaration
   SensorSemantic sensor;
   String xSinTheta;
@@ -388,7 +388,7 @@ class pose6DOF {
   String zDeltaTranslation;
   String sequenceNumber;
   // Constructor
-  pose6DOF(
+  Pose6DOF(
     this.sensor,
     this.xSinTheta,
     this.ySinTheta,

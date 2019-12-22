@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<StepCounter> _listStepCounter = [];                                // Type 19
   List<GeoMagneticRotationVector> _listGeoMagneticRotationVector = [];    // Type 20
   List<HeartRate> _listHeartRate = [];                                    // Type 21
-  List<pose6DOF> _listpose6DOF = [];                                      // Type 28
+  List<Pose6DOF> _listPose6DOF = [];                                      // Type 28
   List<StationaryDetection> _listStationaryDetection = [];                // Type 29
   List<MotionDetection> _listMotionDetection = [];                        // Type 30
   List<HeartBeat> _listHeartBeat = [];                                    // Type 31
@@ -354,7 +354,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
         break;
 
-      case '17':
+      case '17': // Signifiant Motion Sensor
         _listSignifiantMotion.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
@@ -363,6 +363,119 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           }
         });
+        break;
+
+      case '19': // Step Counter
+        _listStepCounter.forEach((item) {
+          if (isAMatch(item.sensor, receivedData)) {
+            List<String> sensorFeed = receivedData['values'].split(';');
+            setState(() {
+              item.step = sensorFeed[0];
+            });
+          }
+        });
+        break;
+
+      case '20': // GeoMagneticRotationVector
+        _listGeoMagneticRotationVector.forEach((item) {
+          if (isAMatch(item.sensor, receivedData)) {
+            List<String> sensorFeed = receivedData['values'].split(';');
+            setState(() {
+              item.x = sensorFeed[0];
+              item.y = sensorFeed[1];
+              item.z = sensorFeed[2];
+              if (sensorFeed.length == 4) {
+                item.someVal = sensorFeed[3];
+              } else if (sensorFeed.length == 5) {
+                item.estimatedHeadingAccuracy = sensorFeed[4];
+              }
+            });
+          }
+        });
+        break;
+
+      case '21': // Heart Rate
+        _listHeartRate.forEach((item) {
+          if (isAMatch(item.sensor, receivedData)) {
+            List<String> sensorFeed = receivedData['values'].split(';');
+            setState(() {
+              item.rate = sensorFeed[0];
+            });
+          }
+        });
+        break;
+
+      case '28': // Pose 6DOF
+        _listPose6DOF.forEach((item) {
+          if (isAMatch(item.sensor, receivedData)) {
+            List<String> sensorFeed = receivedData['values'].split(';');
+            setState(() {
+              item.xSinTheta = sensorFeed[0];
+              item.ySinTheta = sensorFeed[1];
+              item.zSinTheta = sensorFeed[2];
+              item.cosTheta = sensorFeed[3];
+              item.xTranslation = sensorFeed[4];
+              item.yTranslation = sensorFeed[5];
+              item.zTranslation = sensorFeed[6];
+              item.xDeltaQuaternion = sensorFeed[7];
+              item.yDeltaQuaternion = sensorFeed[8];
+              item.zDeltaQuaternion = sensorFeed[9];
+              item.cosDeltaQuaternion = sensorFeed[10];
+              item.xDeltaTranslation = sensorFeed[11];
+              item.yDeltaTranslation = sensorFeed[12];
+              item.zDeltaTranslation = sensorFeed[13];
+              item.sequenceNumber = sensorFeed[14];
+            });
+          }
+        });
+        break;
+
+      case '29': // Stationary Detection
+        _listStationaryDetection.forEach((item) {
+          if (isAMatch(item.sensor, receivedData)) {
+            List<String> sensorFeed = receivedData['values'].split(';');
+            setState(() {
+              item.isImmobile = sensorFeed[0];
+            });
+          }
+        });
+        break;
+
+      case '30': // Motion Detection
+        _listMotionDetection.forEach((item) {
+          if (isAMatch(item.sensor, receivedData)) {
+            List<String> sensorFeed = receivedData['values'].split(';');
+            setState(() {
+              item.isInMotion = sensorFeed[0];
+            });
+          }
+        });
+        break;
+
+      case '31': // Heart Beat
+        _listHeartBeat.forEach((item) {
+          if (isAMatch(item.sensor, receivedData)) {
+            List<String> sensorFeed = receivedData['values'].split(';');
+            setState(() {
+              item.confidence = sensorFeed[0];
+            });
+          }
+        });
+        break;
+
+      case '34': // Low Latency Off Body Detection
+        _listLowLatencyOffBodyDetection.forEach((item) {
+          if (isAMatch(item.sensor, receivedData)) {
+            List<String> sensorFeed = receivedData['values'].split(';');
+            setState(() {
+              item.offBodySate = sensorFeed[0];
+            });
+          }
+        });
+        break;
+
+      case '35': // UncalibratedAccelerometer
+
         break;
     }
   }
