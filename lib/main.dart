@@ -113,29 +113,210 @@ class _MyHomePageState extends State<MyHomePage> {
             if (value.length > 0) {
               value.forEach((dynamic element) {
                 _listAccelerometer.add(Accelerometer(
-                    getInstanceOfSensorSemantic(
-                      Map<String, String>.from(element)),
-                      'NA',
-                      'NA',
-                      'NA'
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA'
                 ));
               });
             }
             break;
 
-          case '2': // Magnetometer
-
+          case '2':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listMagnetometer.add(MagneticField(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
             break;
 
-          case '3': // Orientation Sensor
-
+          case '3':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listOrientationSensor.add(OrientationSensor(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
             break;
 
-          case '4': // Gyroscope
-
+          case '4':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listGyroscope.add(Gyroscope(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
             break;
 
-          case '5': // Ambient Light
+          case '5':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listAmbientLight.add(AmbientLight(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '6':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listAtmosphericPressure.add(AtmosphericPressure(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '8':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listProximity.add(Proximity(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '9':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listGravity.add(Gravity(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '10':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listLinearAcceleration.add(LinearAcceleration(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '11':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listRotationVector.add(RotationVector(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '12':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listRelativeHumidity.add(RelativeHumidity(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '13':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listAmbientTemperature.add(AmbientTemperature(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'));
+              });
+            }
+            break;
+
+          case '14':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listUncalibratedMagneticField.add(UncalibratedMagneticField(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '15':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listGameRotationVector.add(GameRotationVector(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '16':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listUncalibratedGyroscope.add(UncalibratedGyroscope(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
+            break;
         }
       });
     } on PlatformException {}

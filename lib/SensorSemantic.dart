@@ -116,6 +116,7 @@ class OrientationSensor {
   String roll;
   // Constructor
   OrientationSensor(
+    this.sensor,
     this.azimuth,
     this.pitch,
     this.roll
@@ -283,6 +284,7 @@ class GameRotationVector {
   String estimatedHeadingAccuracy;
   // Constructor
   GameRotationVector(
+    this.sensor,
     this.x,
     this.y,
     this.z,
