@@ -101,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<MotionDetection> _listMotionDetection = [];                        // Type 30
   List<HeartBeat> _listHeartBeat = [];                                    // Type 31
   List<LowLatencyOffBodyDetection> _listLowLatencyOffBodyDetection = [];  // Type 34
+  List<UncalibratedAccelerometer> _listUncalibratedAccelerometer = [];    // Type 35
 
   Future<void> getSensorsList() async {
     Map<String, List<dynamic>> sensorCount;
@@ -307,6 +308,147 @@ class _MyHomePageState extends State<MyHomePage> {
                 _listUncalibratedGyroscope.add(UncalibratedGyroscope(
                   getInstanceOfSensorSemantic(
                     Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '17':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listSignifiantMotion.add(SignifiantMotion(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'));
+              });
+            }
+            break;
+
+          case '19':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listStepCounter.add(StepCounter(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'));
+              });
+            }
+            break;
+
+          case '20':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listGeoMagneticRotationVector.add(GeoMagneticRotationVector(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '21':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listHeartRate.add(HeartRate(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '28':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listPose6DOF.add(Pose6DOF(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA',
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '29':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listStationaryDetection.add(StationaryDetection(
+                    getInstanceOfSensorSemantic(
+                        Map<String, String>.from(element)),
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '30':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listMotionDetection.add(MotionDetection(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '31':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listHeartBeat.add(HeartBeat(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '34':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listLowLatencyOffBodyDetection.add(LowLatencyOffBodyDetection(
+                  getInstanceOfSensorSemantic(
+                    Map<String, String>.from(element)),
+                    'NA'
+                ));
+              });
+            }
+            break;
+
+          case '35':
+            if (value.length > 0) {
+              value.forEach((dynamic element) {
+                _listUncalibratedAccelerometer.add(UncalibratedAccelerometer(
+                    getInstanceOfSensorSemantic(
+                        Map<String, String>.from(element)),
                     'NA',
                     'NA',
                     'NA',
@@ -656,7 +798,19 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
 
       case '35': // UncalibratedAccelerometer
-
+        _listUncalibratedAccelerometer.forEach((item) {
+          if (isAMatch(item.sensor, receivedData)) {
+            List<String> sensorFeed = receivedData['values'].split(';');
+            setState(() {
+              item.xUncalibrated = sensorFeed[0];
+              item.yUncalibrated = sensorFeed[1];
+              item.zUncalibrated = sensorFeed[2];
+              item.estimatedXBias = sensorFeed[3];
+              item.estimatedYBias = sensorFeed[4];
+              item.estimatedZBias = sensorFeed[5];
+            });
+          }
+        });
         break;
     }
   }
