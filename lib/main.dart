@@ -129,15 +129,23 @@ class _MyHomePageState extends State<MyHomePage> {
   List<LowLatencyOffBodyDetection> _listLowLatencyOffBodyDetection = [];  // Type 34
   List<UncalibratedAccelerometer> _listUncalibratedAccelerometer = [];    // Type 35
 
+  List<Widget> myUI = [];
+
   Future<void> getSensorsList() async {
     Map<String, List<dynamic>> sensorCount;
     try {
-      Map<dynamic, dynamic> tmp =  await _methodChannel.invokeMethod('getSensorList');
+      Map<dynamic, dynamic> tmp = await _methodChannel.invokeMethod('getSensorsList');
       sensorCount = Map<String, List<dynamic>>.from(tmp);
       sensorCount.forEach((String key, List<dynamic> value) {
         switch(key) {
           case '1': // Accelerometer
             if (value.length > 0) {
+              myUI.add(new SwitchListTile(
+                  title: new Text('Accelerometer'),
+                  activeColor: Colors.red,
+                  value: switchValue1,
+                  onChanged: (bool value) {_onChanged(value,1);}
+              ));
               value.forEach((dynamic element) {
                 _listAccelerometer.add(Accelerometer(
                   getInstanceOfSensorSemantic(
@@ -152,6 +160,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
           case '2':
             if (value.length > 0) {
+              myUI.add(new SwitchListTile(
+                  title: new Text('Magnetometer'),
+                  activeColor: Colors.red,
+                  value: switchValue2,
+                  onChanged: (bool value) {_onChanged(value,2);}
+              ));
               value.forEach((dynamic element) {
                 _listMagnetometer.add(MagneticField(
                   getInstanceOfSensorSemantic(
@@ -495,6 +509,66 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    myUI.add(new SwitchListTile(
+        title: new Text('Orientation Sensor'),
+        activeColor: Colors.red,
+        value: switchValue3,
+        onChanged: (bool value) {_onChanged(value,3);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Gyroscope'),
+        activeColor: Colors.red,
+        value: switchValue4,
+        onChanged: (bool value) {_onChanged(value,4);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Ambient Light'),
+        activeColor: Colors.red,
+        value: switchValue5,
+        onChanged: (bool value) {_onChanged(value,5);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Ambient Pressure'),
+        activeColor: Colors.red,
+        value: switchValue6,
+        onChanged: (bool value) {_onChanged(value,6);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Proximity Sensor'),
+        activeColor: Colors.red,
+        value: switchValue8,
+        onChanged: (bool value) {_onChanged(value,8);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Gravity'),
+        activeColor: Colors.red,
+        value: switchValue9,
+        onChanged: (bool value) {_onChanged(value,9);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Linear Acceleration'),
+        activeColor: Colors.red,
+        value: switchValue10,
+        onChanged: (bool value) {_onChanged(value,10);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Rotation Vector'),
+        activeColor: Colors.red,
+        value: switchValue11,
+        onChanged: (bool value) {_onChanged(value,11);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Relative Humidity'),
+        activeColor: Colors.red,
+        value: switchValue12,
+        onChanged: (bool value) {_onChanged(value,12);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Ambient Temperature'),
+        activeColor: Colors.red,
+        value: switchValue13,
+        onChanged: (bool value) {_onChanged(value,13);}
+    ));
     super.initState();
     _methodChannel = MethodChannel(_methodChannelName);
     _eventChannel = EventChannel(_eventChannelName);
@@ -507,7 +581,7 @@ class _MyHomePageState extends State<MyHomePage> {
     switch (receivedData['type']) {
       case '1': // Accelerometer
         _listAccelerometer.forEach((item) {
-          if (isAMatch(item.sensor, receivedData)) {
+          if (isAMatch(item.sensor, receivedData) && switchValue1 == true) {
             List<String> sensorFeed = receivedData['values'].split(';');
             setState(() {
               item.x = sensorFeed[0];
@@ -934,33 +1008,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold (
       appBar: AppBar(
         title: Text(
-          'CowBehavior',
+          'Cow Behavior App',
           style: TextStyle(color: Colors.black),
         ), backgroundColor: Colors.lightBlue,
       ),
     body: new Container(
       padding:EdgeInsets.all(32.0),
       child: new Column(
-        children: <Widget>[
-          new SwitchListTile(
-            title: new Text('Accelerometer'),
-            activeColor: Colors.red,
-            value: switchValue1,
-            onChanged: (bool value) {_onChanged(value,1);}
-          ),
-          new SwitchListTile(
-              title: new Text('Gyroscope'),
-              activeColor: Colors.red,
-              value: switchValue2,
-              onChanged: (bool value) {_onChanged(value,2);}
-          ),
-          new SwitchListTile(
-              title: new Text('Magnetometer'),
-              activeColor: Colors.red,
-              value: switchValue3,
-              onChanged: (bool value) {_onChanged(value,3);}
-          ),
-        ],
+        children: myUI,
       ),
       ),
     );
