@@ -569,6 +569,51 @@ class _MyHomePageState extends State<MyHomePage> {
         value: switchValue13,
         onChanged: (bool value) {_onChanged(value,13);}
     ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Uncalibrated Magnetic Field'),
+        activeColor: Colors.red,
+        value: switchValue14,
+        onChanged: (bool value) {_onChanged(value,14);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Game Rotation Vector'),
+        activeColor: Colors.red,
+        value: switchValue15,
+        onChanged: (bool value) {_onChanged(value,15);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Uncalibrated Gyroscoper'),
+        activeColor: Colors.red,
+        value: switchValue16,
+        onChanged: (bool value) {_onChanged(value,16);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Signifiant Motion'),
+        activeColor: Colors.red,
+        value: switchValue17,
+        onChanged: (bool value) {_onChanged(value,17);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Step Counter'),
+        activeColor: Colors.red,
+        value: switchValue19,
+        onChanged: (bool value) {_onChanged(value,19);}
+    ));
+    myUI.add(new SwitchListTile(
+        title: new Text('Geo Magnetic Rotation Vector'),
+        activeColor: Colors.red,
+        value: switchValue20,
+        onChanged: (bool value) {_onChanged(value,20);}
+    ));
+
+    List<HeartRate> _listHeartRate = [];                                    // Type 21
+    List<Pose6DOF> _listPose6DOF = [];                                      // Type 28
+    List<StationaryDetection> _listStationaryDetection = [];                // Type 29
+    List<MotionDetection> _listMotionDetection = [];                        // Type 30
+    List<HeartBeat> _listHeartBeat = [];                                    // Type 31
+    List<LowLatencyOffBodyDetection> _listLowLatencyOffBodyDetection = [];  // Type 34
+    List<UncalibratedAccelerometer> _listUncalibratedAccelerometer = [];    // Type 35
+
     super.initState();
     _methodChannel = MethodChannel(_methodChannelName);
     _eventChannel = EventChannel(_eventChannelName);
@@ -1014,9 +1059,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     body: new Container(
       padding:EdgeInsets.all(32.0),
-      child: new Column(
-        children: myUI,
-      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+         child: new Column(
+          children: myUI,
+         ),
+        ),
       ),
     );
   }
